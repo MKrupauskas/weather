@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <h1>Weather</h1>
-    <!-- <p>{{ msg }}</p> -->
-    <label for="email">Email</label>
-    <input v-model="email" type="email" name="email" id="email" placeholder="awesome@email.com">
-    <label for="password">Password</label>
-    <input v-model="password" type="password" name="password" id="password" placeholder="Password">
-    <button @click="register">Register</button>
-  </div>
+  <v-layout column>
+    <v-flex>
+      <div class="white elevation-2">
+        <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar-title>Register</v-toolbar-title>
+        </v-toolbar>
+        <div class="pl-4 pr-4 pt-2 pb-2">
+          <div v-html="error" class="flash pt-2 pb-2"/>
+          <v-text-field v-model="email" type="email" name="email" label="Email" placeholder="awesome@email.com"></v-text-field>
+          <br>
+          <v-text-field v-model="password" type="password" name="password" label="Password" placeholder="Password"></v-text-field>
+          <br>
+          <v-btn dark class="cyan" @click="register">Register</v-btn>
+        </div>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -16,16 +24,20 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: null
     }
   },
   methods: {
     async register () {
-      const response = await AuthenticationService.register({
-        email: this.email,
-        password: this.password
-      })
-      console.log(response.data)
+      try {
+        await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
@@ -33,5 +45,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.flash {
+  color: red;
+}
 </style>
