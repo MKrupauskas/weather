@@ -13,5 +13,8 @@ module.exports = {
       storage: './weather.sqlite',
       operatorsAliases: Op
     }
+  },
+  authentication: {
+    jwtSecret: process.env.JTW_SECRET || 'secret'
   }
 }
