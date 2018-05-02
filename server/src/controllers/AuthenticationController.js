@@ -4,23 +4,30 @@ const config = require('../config/config')
 
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
-  return jwt.sign(user, config.authentication.jwtSecret, { expiresIn: ONE_WEEK })
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
 }
 
 module.exports = {
   async register (req, res) {
     try {
       const user = await User.create(req.body)
-      res.send(user.toJSON())
+      const userJson = user.toJSON()
+      res.send({
+        user: userJson,
+        token: jwtSignUser(userJson)
+      })
     } catch (err) {
-      res.status(500).send({ error: 'We ran into an issue :( Try again.' })
+      res.status(400).send({
+        error: 'This email account is already in use.'
+      })
     }
   },
 
   async login (req, res) {
     try {
-      const { email, password } = req.body
-
+      const {email, password} = req.body
       const user = await User.findOne({
         where: {
           email: email
@@ -28,32 +35,27 @@ module.exports = {
       })
 
       if (!user) {
-        return res.status(401).send({
-          error: 'The login information was incorrect! cant get the user'
+        return res.status(403).send({
+          error: 'The login information was incorrect'
         })
       }
 
-      // TODO: THE ERROR IS HERE
       const isPasswordValid = await user.comparePassword(password)
-
-      console.log('\n\n\n', isPasswordValid)
-
       if (!isPasswordValid) {
-        return res.status(401).send({
-          error: 'The login information was incorrect! pass'
+        return res.status(403).send({
+          error: 'The login information was incorrect'
         })
       }
 
-      const userJSON = user.toJSON()
-      jwtSignUser(userJSON)
-
+      const userJson = user.toJSON()
       res.send({
-        user: userJSON,
-        token: jwtSignUser(userJSON)
+        user: userJson,
+        token: jwtSignUser(userJson)
       })
-      res.send('ayyayayyayay')
     } catch (err) {
-      res.status(500).send({ error: 'We ran into an issue :( Try again. login' })
+      res.status(500).send({
+        error: 'An error has occured trying to log in'
+      })
     }
   }
 }
