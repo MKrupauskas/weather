@@ -7,11 +7,13 @@
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <div v-html="error" class="flash pt-2 pb-2"/>
-          <v-text-field v-model="email" type="email" name="email" label="Email" placeholder="awesome@email.com"></v-text-field>
-          <br>
-          <v-text-field v-model="password" type="password" name="password" label="Password" placeholder="Password"></v-text-field>
-          <br>
-          <v-btn dark class="cyan" @click="register">Register</v-btn>
+          <form>
+            <v-text-field v-model="email" type="email" name="email" label="Email" placeholder="awesome@email.com"></v-text-field>
+            <br>
+            <v-text-field v-model="password" type="password" name="password" label="Password" placeholder="Password"></v-text-field>
+            <br>
+            <v-btn dark class="cyan" @click="register">Register</v-btn>
+          </form>
         </div>
       </div>
     </v-flex>
