@@ -8,7 +8,7 @@
 
     <v-toolbar-items>
       <v-btn @click="navigateTo('/')" flat dark>
-          Vilnius
+          Forecast
       </v-btn>
     </v-toolbar-items>
 
