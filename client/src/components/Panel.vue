@@ -14,11 +14,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      title: 'Hello World!'
-    }
-  }
+  props: [
+    'title'
+  ]
 }
 </script>
 

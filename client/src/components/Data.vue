@@ -1,7 +1,8 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <panel />
+      <panel title="Data">
+      </panel>
     </v-flex>
   </v-layout>
 </template>
