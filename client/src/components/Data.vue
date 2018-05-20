@@ -17,6 +17,7 @@ import Panel from '@/components/Panel'
 export default {
   data () {
     return {
+      data: null,
       weather: null
     }
   },
