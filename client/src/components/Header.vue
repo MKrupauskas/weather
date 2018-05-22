@@ -7,7 +7,7 @@
     </v-toolbar-title>
 
     <v-toolbar-items>
-      <v-btn @click="navigateTo('/')" flat dark>
+      <v-btn @click="navigateTo('data')" flat dark>
           Forecast
       </v-btn>
     </v-toolbar-items>
@@ -47,4 +47,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .toolbar__title {
+    cursor: pointer;
+  }
 </style>
