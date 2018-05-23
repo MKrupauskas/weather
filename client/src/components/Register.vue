@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex>
       <panel title="Register">
           <div v-html="error" class="flash pt-2 pb-2"/>
           <form>

@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex>
       <panel title="Login">
           <div v-html="error" class="flash pt-2 pb-2"/>
           <v-text-field v-model="email" type="email" name="email" label="Email" placeholder="awesome@email.com"></v-text-field>

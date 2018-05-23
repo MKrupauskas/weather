@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-flex xs6 offset-xs3>
+    <v-flex>
       <panel title="Data">
         <div v-for="item in weather" :key="item.title">
           {{ item.title }}
